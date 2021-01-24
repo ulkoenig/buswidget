@@ -1,7 +1,4 @@
-// This script shows a random Scriptable API in a widget. The script is meant to be used with a widget configured on the Home Screen.
-// You can run the script in the app to preview the widget or you can go to the Home Screen, add a new Scriptable widget and configure the widget to run this script.
-// You can also try creating a shortcut that runs this script. Running the shortcut will show widget.
-// let api = await randomAPI()
+
 let widget = await createWidget()
 if (config.runsInWidget) {
   // The script runs inside a widget, so we pass our instance of ListWidget to be shown inside the widget on the Home Screen.
@@ -10,8 +7,7 @@ if (config.runsInWidget) {
   // The script runs inside the app, so we preview the widget.
   widget.presentSmall()
 }
-// Calling Script.complete() signals to Scriptable that the script have finished running.
-// This can speed up the execution, in particular when running the script from Shortcuts or using Siri.
+
 Script.complete()
 
 async function createWidget(api) {
@@ -28,9 +24,6 @@ async function createWidget(api) {
   widget.backgroundGradient = gradient
   // Show app icon and title
   let titleStack = widget.addStack()
-//   let appIconElement = titleStack.addImage(appIcon)
-//   appIconElement.imageSize = new Size(15, 15)
-//   appIconElement.cornerRadius = 4
   titleStack.addSpacer(1)
   let titleElement = titleStack.addText(title)
   titleElement.textColor = Color.red()
@@ -42,7 +35,7 @@ async function createWidget(api) {
   departureTitle.font = Font.systemFont(10)
   widget.addSpacer(2)
   
-  // Show API
+  // Get bus departure
   const url = "https://rest.busradar.conterra.de/prod/haltestellen/4589102/abfahrten?sekunden=1800"
   const r = new Request(url)
   let resp = await r.loadJSON()
